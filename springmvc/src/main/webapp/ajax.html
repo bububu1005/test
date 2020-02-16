@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="js/jquery.js"></script>
+<body>
+
+<form>
+    车名：<input type="text" name="cname"><br>
+    车颜色：<input type="text" name="ccolor"><br>
+    <input type="button" value="提交" onclick="checkAjax()">
+</form>
+
+</body>
+<script>
+    function  checkAjax(){
+        /*alert("-----")*/
+        var sendData = $("form").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax/checkAjax",
+            data: sendData,
+            success: function(msg){
+                alert( "成功了" + msg.cname);
+            },
+            error: function (error){
+                alert("有错误"+error.cname)
+            },
+            dataType:"json"
+        });
+    }
+
+</script>
+</html>

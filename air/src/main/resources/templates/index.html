@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+        </tr>
+        <tr th:each="air : ${airList}">
+            <td th:text="${airStat.count}"></td>
+            <td th:text="${air.districtld}"></td>
+            <td th:text="${#dates.format(air.monitorTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${air.pm10}"></td>
+            <td th:text="${air.pm25}"></td>
+            <td th:text="${air.monitoringStation}"></td>
+            <td th:text="${#dates.format(air.lastModifyTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</body>
+</html>

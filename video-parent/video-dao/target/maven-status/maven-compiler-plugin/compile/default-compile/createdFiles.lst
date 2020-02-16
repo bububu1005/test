@@ -1,0 +1,6 @@
+com\qf\dao\AdminDao.class
+com\qf\dao\SubjectDao.class
+com\qf\dao\UserDao.class
+com\qf\dao\CourseDao.class
+com\qf\dao\SpeakerDao.class
+com\qf\dao\VideoDao.class

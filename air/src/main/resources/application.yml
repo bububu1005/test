@@ -1,0 +1,25 @@
+# 连接数据库...
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/air?useSSL=true&ServerTimezone=Shanghai&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    suffix: .html
+    prefix: classpath:/static/
+    servlet:
+      content-type: text/html
+    cache: false
+    encoding: utf-8
+    mode: HTML5
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    auto-mapping-behavior: full
+  type-aliases-package: com.bu.entity

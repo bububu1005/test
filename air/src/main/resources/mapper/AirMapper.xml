@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bu.mapper.AirMapper">
+    <resultMap id="airMap" type="com.bu.entity.Air">
+        <id property="id" column="id"></id>
+        <result property="monitor_time" column="monitor_time"></result>
+        <result property="monitoring_station" column="monitoring_station"></result>
+        <association property="district" javaType="com.bu.entity.District">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+    <select id="getAll" resultMap="airMap">
+        select * from air,district where air.district_id=district.id
+    </select>
+</mapper>

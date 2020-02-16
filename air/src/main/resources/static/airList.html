@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>airList</title>
+</head>
+<body>
+<h1 align="center">空气质量检测信息库</h1>
+<div align="center">
+    按区域查询<select onclick="select()" id="select">
+        <option>不限</option>
+        <option th:each="district : ${districtList}"
+                th:value="${district.id}"
+                th:text="${district.name}"
+                th:href="@{/getByDid(did=${district.id})}">
+        </option>
+    </select>
+    <a href="#">添加空气质量信息</a>
+    <br/><br/>
+</div>
+
+<table border="1px" align="center">
+    <tr>
+        <td>序号</td>
+        <td>区域</td>
+        <td>检测时间</td>
+        <td>pm10</td>
+        <td>pm25</td>
+        <td>监测站</td>
+    </tr>
+    <tr th:each="air : ${pageInfo}">
+        <td th:text="${airStat.count}"></td>
+        <td th:text="${air.district.name}"></td>
+        <td th:text="${#dates.format(air['monitor_time'], 'yyyy-MM-dd')}"></td>
+        <td th:text="${air.pm10}"></td>
+        <td th:text="${air.pm25}"></td>
+        <td th:text="${air.monitoring_station}"></td>
+    </tr>
+    <tr>
+        <td colspan="9"align="center">
+            <a th:if="${not isFirstPage}" th:href="@{/getAll(pageNum=1)}">首页</a>
+            <a th:if="${isFirstPage}" th:href="@{#}">首页</a>
+            <a th:if="${isFirstPage}" th:href="@{#(pageNum=${pageInfo.getPageNum()-1})}">上一页</a>
+            <a th:if="${not isFirstPage}" th:href="@{/getAll(pageNum=${pageInfo.getPageNum()-1})}">上一页</a>
+            <a>当前页:<span th:text="${pageInfo.getPageNum()}"></span>/<span th:text="${pageInfo.getPages()}"></span></a>
+            <a th:if="${isLastPage}" th:href="@{#(pageNum=${pageInfo.getPageNum()+1})}">下一页</a>
+            <a th:if="${not isLastPage}" th:href="@{/getAll(pageNum=${pageInfo.getPageNum()+1})}">下一页</a>
+            <a th:if="${isLastPage}" th:href="@{#(pageNum=${pageInfo.getPages()})}">尾页</a>
+            <a th:if="${not isLastPage}" th:href="@{/getAll(pageNum=${pageInfo.getPages()})}">尾页</a>
+        </td>
+    </tr>
+</table>
+</body>
+<script type="text/javascript">
+    function select() {
+        //var id=$("#select").val();
+        var did=$("#select").find("option:selected").val();
+        window.location.href="getByDid?did="+did;
+    }
+</script>
+</html>
