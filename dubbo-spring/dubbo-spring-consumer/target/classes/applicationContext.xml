@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+
+    <!--    1. 指定当前消费者服务的名称.-->
+    <dubbo:application name="dubbo-spring-consumer" />
+
+    <!--    2. 指定zookeeper的地址.-->
+    <dubbo:registry address="zookeeper://192.168.98.98:2181" />
+
+    <!--    3. 说明需要用到的服务名称.-->
+    <dubbo:reference interface="com.bu.service.DemoService" id="demoService" />
+    <!--    在你spring容器中就有一个实例为demoService-->
+
+
+    <!--    创建demoController并将DemoService注入-->
+    <bean id="demoController" class="com.bu.controller.DemoController">
+        <property name="demoService" ref="demoService" />
+    </bean>
+</beans>
